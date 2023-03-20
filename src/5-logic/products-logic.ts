@@ -131,6 +131,26 @@ async function getProductsCheaperThan(minPrice: number): Promise<ProductModel[]>
     // Return:
     return products;
 }
+// Get products expensive than max price:
+async function getProductsExpensiveThan(maxPrice: number): Promise<ProductModel[]> {
+
+    // Creating the query:
+    const sql = `
+    SELECT ProductID AS id,
+        ProductName AS name,
+        UnitPrice AS price,
+        UnitsInStock AS stock
+    FROM products
+    WHERE UnitPrice >= '${maxPrice}'
+    ORDER BY UnitPrice
+    `;
+
+    // Execute:
+    const products = await dal.execute(sql);
+
+    // Return:
+    return products;
+}
 
 export default {
     getAllProducts,
@@ -138,5 +158,6 @@ export default {
     addProduct,
     updateProduct,
     deleteProduct,
-    getProductsCheaperThan
+    getProductsCheaperThan,
+    getProductsExpensiveThan
 }

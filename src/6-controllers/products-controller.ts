@@ -76,4 +76,16 @@ router.get("/products-cheaper-than/:minPrice([0-9]+)", async (request: Request, 
     }
 });
 
+// GET http://localhost:3001/api/products-expensive-than?maxPrice=100
+router.get("/products-expensive-than", async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const maxPrice = +request.query.maxPrice;
+        const products = await productsLogic.getProductsExpensiveThan(maxPrice);
+        response.json(products);
+    }
+    catch (err: any) {
+        next(err);
+    }
+});
+
 export default router;
