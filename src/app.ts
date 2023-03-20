@@ -7,16 +7,16 @@ import productsController from "./6-controllers/products-controller";
 // Create express server:
 const server = express();
 
- // Creates request.body object if exists
+// Creates request.body object if exists
 server.use(express.json());
 
 // Binding our middleware:
 
 // Tell the server to listen to any router written in our controller:
-server.use("/api",productsController);
+server.use("/api", productsController);
 
 // Route not found middleware
-server.use("*",routeNotFound);
+server.use("*", routeNotFound);
 
 // Catch all middleware:
 server.use(catchAll)
